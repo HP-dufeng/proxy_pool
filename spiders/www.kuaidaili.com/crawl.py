@@ -1,12 +1,12 @@
 from bs4 import BeautifulSoup
 import requests
-from mullti_task import MultiCrawl
+
 import publisher
 
 headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"}
 
-def crawl_ip(url):
-    print("crawling proxy from url: " + url)
+def crawl_proxy(url):
+    count = 0
     r = requests.get(url, headers=headers)
     soup = BeautifulSoup(r.content, "html.parser")
     for sc in soup.find_all(attrs={"data-title": "IP"}):
@@ -16,8 +16,12 @@ def crawl_ip(url):
             port = tr.find(attrs={"data-title": "PORT"}).text.strip()
             proxy_type = tr.find(attrs={"data-title": "类型"}).text.strip()
             publisher.push((host, port, proxy_type))
+
+            count+=1
         except:
             pass
+
+    return count
 
 def getther_links(size): 
     links = set()
@@ -28,8 +32,6 @@ def getther_links(size):
     
     return links
 
-crawl = MultiCrawl(crawl_ip)
-links = getther_links(100)
-crawl.do_jobs(links)
 
-print("result:")
+
+

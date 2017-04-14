@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node worker.js"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "amqp": "^0.2.6"
+    "amqp": "^0.2.6",
+    "bluebird": "^3.5.0",
+    "redis": "^2.7.1",
+    "request": "^2.81.0"
   }
 }
